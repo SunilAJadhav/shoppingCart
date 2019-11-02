@@ -26,6 +26,10 @@ const ListLink = styled(NavLink)`
     margin: 0 15px;
     cursor: pointer;
     text-decoration: none;
+
+    &.active {
+        border-bottom: 1px solid #FFFFFF;
+    }
 `;
 
  const Header = () => {

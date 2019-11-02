@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
+import { addToCart } from './actions/cartActions';
 
 const ProductContainer = styled.div`
     display: flex;
@@ -20,8 +22,8 @@ const ProductPrice = styled.h3`
 
  class Home extends Component {
 
-    handleAddToCartClick = () => {
-        console.log('handle click....');
+    handleAddToCartClick = (name) => {
+        this.props.addToCart(name);
     }
 
     renderProduct = (product, index) => {
@@ -29,25 +31,17 @@ const ProductPrice = styled.h3`
             <ProductContainer key={'product'+ index}>
                 <ProductName>{product.name}</ProductName>
                 <ProductPrice>${product.price}</ProductPrice>
-                <button onClick={()=>{this.handleAddToCartClick()}}>add to cart</button>
+                <button onClick={()=>{this.handleAddToCartClick(product.name)}}>add to cart</button>
             </ProductContainer>
         );
     }
 
     render() {
 
-        const products = [
-            {name: "Sledgehammer", price: 127.76 },
-            {name: "Axe", price: 190.51 },
-            {name: "Bandsaw",price: 562.14 },
-            {name: "Chisel", price: 13.9 },
-            {name: "Hacksaw", price: 19.45 }
-        ];
-
         return(
             <div>
                {
-                    products.map((product, index) => this.renderProduct(product, index))
+                    this.props.products.map((product, index) => this.renderProduct(product, index))
                 }
             </div>
             )
@@ -55,4 +49,15 @@ const ProductPrice = styled.h3`
 
  }
 
-export default Home;
+const mapStateToProps = (state)=>{
+    return {
+      products: state.products
+    }
+  }
+const mapDispatchToProps= (dispatch)=>{
+    return{
+        addToCart: (name) => {dispatch(addToCart(name))}
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Home);
