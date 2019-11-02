@@ -1,20 +1,36 @@
 import React, { Component } from 'react';
+import styled from 'styled-components';
+
+const ProductContainer = styled.div`
+    display: flex;
+    width: 70%;
+    align-items: center;
+    margin: 0 auto;
+    padding: 20px 0;
+    border-bottom: 1px solid #FFFFFF;
+`;
+
+const ProductName = styled.h2`
+    width: 33%;
+`;
+
+const ProductPrice = styled.h3`
+   width: 33%;
+`;
 
  class Home extends Component {
 
-    handleClick = () => {
+    handleAddToCartClick = () => {
         console.log('handle click....');
     }
 
     renderProduct = (product, index) => {
         return(
-            <div key={'product'+ index}>
-                <div>
-                    <h2>{product.name}</h2>
-                    <h3>${product.price}</h3>
-                    <button onClick={()=>{this.handleAddToCartClick()}}>add to cart</button>
-                </div>
-            </div>
+            <ProductContainer key={'product'+ index}>
+                <ProductName>{product.name}</ProductName>
+                <ProductPrice>${product.price}</ProductPrice>
+                <button onClick={()=>{this.handleAddToCartClick()}}>add to cart</button>
+            </ProductContainer>
         );
     }
 

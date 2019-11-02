@@ -2,6 +2,17 @@
 
 < add documentation here >
 
+#### Requirements
+
+* Node.js
+* NPM
+
+### Package installation
+npm install
+
+ ### Start the application
+npm start
+
 ---
 
 ## Test Instructions
